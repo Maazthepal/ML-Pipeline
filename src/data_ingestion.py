@@ -2,7 +2,6 @@ import pandas as pd
 import os
 from sklearn.model_selection import train_test_split
 import logging
-import yaml
 
 log_dir = "logs"
 os.makedirs(log_dir, exist_ok=True)
@@ -47,6 +46,7 @@ def data_manipulation(df: pd.DataFrame) -> pd.DataFrame:
         df['TotalCharges'] = df['TotalCharges'].fillna(df['TotalCharges'].mean())
         logger.info("Filled missing values in 'TotalCharges' with mean")
         return df
+    
     except KeyError as e:
         logger.error(f"Key error during data manipulation: {e}")
         raise
