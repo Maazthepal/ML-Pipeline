@@ -36,9 +36,16 @@ stages:
     - models/xgb_model.pkl
   model_evaluation:
     cmd: python src/model_evaluation.py
-    deps: 
+    deps:
     - src/model_evaluation.py
     params:
     - model_evaluation.threshold
     metrics:
     - reports/metrics.json
+params:
+- dvclive/params.yaml
+metrics:
+- dvclive/metrics.json
+plots:
+- dvclive/plots/metrics:
+    x: step

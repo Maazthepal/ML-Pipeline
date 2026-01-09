@@ -6,6 +6,7 @@ import pandas as pd
 import logging
 import json
 import yaml
+from dvclive import Live
 
 log_dir = "logs"
 os.makedirs(log_dir, exist_ok=True)
@@ -139,6 +140,14 @@ def main():
         logger.info(f"Test data loaded: X_test shape {X_test.shape}, y_test shape {y_test.shape}")
 
         metrics = evaluate_model(model, X_test, y_test, threshold=params['threshold'])
+
+         # Experiment tracking using dvclive
+        with Live(save_dvc_exp=True) as live:
+            live.log_metric('accuracy', accuracy_score(y_test, y_test))
+            live.log_metric('precision', precision_score(y_test, y_test))
+            live.log_metric('recall', recall_score(y_test, y_test))
+
+            live.log_params(params)
 
         save_metrics("reports/metrics.json", metrics)
         

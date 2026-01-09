@@ -68,8 +68,8 @@ stages:
     deps:
     - path: src/model_evaluation.py
       hash: md5
-      md5: 3edf9496d5936f43bb94a45aa98facd6
-      size: 5187
+      md5: 16fff317c22d077f69e15afa73501e5e
+      size: 5564
     params:
       params.yaml:
         model_evaluation.threshold: 0.55
