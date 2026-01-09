@@ -5,8 +5,11 @@ stages:
     deps:
     - path: src/data_ingestion.py
       hash: md5
-      md5: 28850afb26bfa0080ba7c8876343f3fb
-      size: 3135
+      md5: 8d18e7ecf6ca64bce0d80cdf1ab6ecc4
+      size: 3805
+    params:
+      params.yaml:
+        data_ingestion.test_size: 0.2
     outs:
     - path: data/raw
       hash: md5
@@ -44,8 +47,17 @@ stages:
     deps:
     - path: src/model_building.py
       hash: md5
-      md5: 9d41ff216091a96f2d8cbb4019e30b38
-      size: 3753
+      md5: 4ec18fafca8e51361046b59caab86244
+      size: 4127
+    params:
+      params.yaml:
+        model_building.colsample_bytree: 0.8
+        model_building.learning_rate: 0.05
+        model_building.max_depth: 3
+        model_building.n_estimators: 100
+        model_building.random_state: 42
+        model_building.scale_pos_weight: 2.0
+        model_building.subsample: 0.8
     outs:
     - path: models/xgb_model.pkl
       hash: md5
@@ -56,8 +68,11 @@ stages:
     deps:
     - path: src/model_evaluation.py
       hash: md5
-      md5: 2e1f201d230765053f4a54763b58576c
-      size: 4576
+      md5: 3edf9496d5936f43bb94a45aa98facd6
+      size: 5187
+    params:
+      params.yaml:
+        model_evaluation.threshold: 0.55
     outs:
     - path: reports/metrics.json
       hash: md5
